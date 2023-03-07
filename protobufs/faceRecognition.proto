@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+message recognitionInit {
+    string cameraIP = 1;
+}
+message FaceRecognitionProcess {
+    bytes image = 1;
+}
+message FaceIDResponse {
+    int32 faceID = 1;
+}
+message FaceRecognitionResponse {
+    int32 faceID = 1;
+    bool containsFace = 2;
+}
+message Empty {
+}
+service Recognitions {
+    rpc recognise (recognitionInit) returns (Empty) ;
+    rpc processImage (FaceRecognitionProcess) returns (FaceRecognitionResponse);
+    rpc getFaceID1 (FaceRecognitionProcess) returns (FaceIDResponse);
+    rpc getFaceID2 (FaceRecognitionProcess) returns (FaceIDResponse);
+    rpc getFaceID3 (FaceRecognitionProcess) returns (FaceIDResponse);
+}
