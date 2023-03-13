@@ -162,6 +162,6 @@ class RecognitionService(faceRecognition_pb2_grpc.RecognitionsServicer):
             id, confidence = self.face_recogniser.predict(gray[y:y + h, x:x + w])
             # Check if confidence is less them 100 ==> "0" is perfect match
             if confidence < 100:
-                if self.loggedInDB != self.islogin:
+                if self.loggedInDB[id] != self.islogin:
                     self.loggedInDB[id] = self.islogin
                     print("user with id:"+str(id)+" logged in")
