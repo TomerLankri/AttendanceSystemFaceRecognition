@@ -1,18 +1,22 @@
+import faceRecognition_pb2_grpc
+import concurrent.futures
+
 import grpc
+
 import faceRecognition_pb2_grpc
 import recognitionService
-import concurrent.futures
-import grpc
-from faceRecognition_pb2 import Empty, recognitionInit
+from faceRecognition_pb2 import recognitionInit
 from faceRecognition_pb2_grpc import RecognitionsStub
-import matplotlib.pyplot as plt
+
+
 def serve():
-    server = grpc.server(concurrent.futures.ThreadPoolExecutor(max_workers=10),)
+    server = grpc.server(concurrent.futures.ThreadPoolExecutor(max_workers=10), )
     service = recognitionService.RecognitionService(isLogin=True)
     faceRecognition_pb2_grpc.add_RecognitionsServicer_to_server(service, server)
-    server.add_insecure_port("[::]:50051")
+    server.add_insecure_port("[::]:3001")
+    print("running")
     server.start()
-    # server.wait_for_termination()
+    server.wait_for_termination()
 
 
 if __name__ == "__main__":

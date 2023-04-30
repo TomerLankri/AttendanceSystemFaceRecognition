@@ -2,17 +2,8 @@ import base64
 import datetime
 import os
 
-from flask import Flask
 
-# Define the path to the dataset directory
-dataset_dir = "/path/to/dataset"
-
-# Create a Flask app instance
-app = Flask(__name__)
-
-
-# Create a route for the JSON response
-def get_images():
+def getTable():
     # Initialize a list to store the response
     response_list = []
     dataset_dir = "/Users/tomer/PycharmProjects/a/recognitions/dataset"
@@ -43,15 +34,12 @@ def get_images():
                         # Add the user, date, and image data to the response list
                         response_list.append({
                             "name": user_name,
-                            "id": user_id,
+                            "_id": user_id,
                             "date": date_str,
                             "image_data": image_data
                         })
 
     # Return the JSON response
     res = dict()
-    res["stuedentList"] = response_list
+    res["data"] = response_list
     return res
-
-
-print(get_images())
