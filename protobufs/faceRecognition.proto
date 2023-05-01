@@ -1,0 +1,29 @@
+syntax = "proto3";
+package numproto.protobuf;
+
+message recognitionInit {
+    string cameraIP = 1;
+}
+message FaceRecognitionProcess {
+    bytes image = 1;
+}
+message FaceIDResponse {
+    int32 faceID = 1;
+}
+message FaceDetectionResponse {
+    bytes faces = 1;
+}
+message FaceRecognitionResponse {
+    int32 faceID = 1;
+}
+message Empty {
+}
+
+service Recognitions {
+    rpc recognise (recognitionInit) returns (Empty) ;
+    rpc processImage (FaceRecognitionProcess) returns (Empty);
+    rpc detectFace (FaceRecognitionProcess) returns (FaceDetectionResponse);
+    rpc getFaceID1 (FaceRecognitionProcess) returns (FaceIDResponse);
+    rpc addFace(Empty) returns (Empty);
+    rpc trainRecognizer(Empty) returns (Empty);
+}
